@@ -67,12 +67,9 @@ p {
   display: flex;
 }
 
-.Actions > .btn {
-  background-color: #11b173c1;
-}
-
-.Actions > .btn:first-child {
-  margin-right: 0.25rem;
+.btn.btn-tweet {
+  background-color: #1da1f2;
+  text-decoration: none;
 }
 
 /* btn's styling */
