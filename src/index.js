@@ -3,33 +3,39 @@ import ReactDOM from "react-dom";
 import "./styles.css";
 
 const QUOTS = [
-  { author: "abdelli nasredine", text: "I am the best text" },
-  { author: "abdelli nasredine", text: "I am the best text 2" },
-  { author: "abdelli nasredine", text: "I am the best text 3" },
-  { author: "abdelli nasredine", text: "I am the best text 4" },
-  { author: "abdelli nasredine", text: "I am the best text 5" }
+  { author: "Author n°1", text: "I am a quot n°1" },
+  { author: "Author n°2", text: "I am a quot n°2" },
+  { author: "Author n°3", text: "I am a quot n°3" },
+  { author: "Author n°4", text: "I am a quot n°4" },
+  { author: "Author n°5", text: "I am a quot n°5" }
 ];
 
 class QuotMachine extends React.Component {
   constructor() {
     super();
     this.state = { quots: QUOTS, selectedIndx: this.random() };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClickRandomize = this.handleClickRandomize.bind(this);
   }
   random() {
     return Math.floor(Math.random() * QUOTS.length);
   }
-  handleClick() {
+  handleClickRandomize() {
     this.setState({ selectedIndx: this.random() });
   }
   render() {
     const { quots, selectedIndx } = this.state;
+    const displyedQuot = quots[selectedIndx];
+    const tweetLink = `https://twitter.com/intent/tweet?text=${
+      displyedQuot.text
+    }`;
     return (
       <div className="QuotMachine">
-        <Quot quot={quots[selectedIndx]} />
+        <Quot quot={displyedQuot} />
         <div className="flex space-between">
-          <Social />
-          <button className="btn" onClick={this.handleClick}>
+          <a className="btn btn-tweet" href={tweetLink}>
+            Tweet
+          </a>
+          <button className="btn" onClick={this.handleClickRandomize}>
             Randomize
           </button>
         </div>
@@ -44,15 +50,6 @@ function Quot(props) {
     <div className="Quot">
       <p className="Text">{text}</p>
       <span className="Author">{author}</span>
-    </div>
-  );
-}
-
-function Social() {
-  return (
-    <div className="Actions">
-      <button className="btn">Share</button>
-      <button className="btn">Like</button>
     </div>
   );
 }
